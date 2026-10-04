@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una noche para nosotros ❤️</title>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; font-family:Georgia, "Times New Roman", serif;
+    color:#fff; background:
+      radial-gradient(circle at 50% 25%, rgba(170,20,60,.30), transparent 35%),
+      linear-gradient(145deg,#09040a,#1a0710 50%,#070307);
+    display:flex; align-items:center; justify-content:center; overflow-x:hidden;
+  }
+  .stars{position:fixed;inset:0;pointer-events:none;opacity:.45;
+    background-image:radial-gradient(#fff 1px,transparent 1px);
+    background-size:55px 55px}
+  .card{
+    width:min(92%,720px); margin:35px auto; padding:42px 28px;
+    text-align:center; border:1px solid rgba(255,255,255,.18);
+    border-radius:28px; background:rgba(12,5,10,.82);
+    box-shadow:0 25px 80px rgba(0,0,0,.65),0 0 55px rgba(180,20,75,.16);
+    backdrop-filter:blur(8px); position:relative;
+  }
+  .ticket{font-family:Arial,sans-serif;letter-spacing:4px;font-size:11px;color:#e9a4b8}
+  h1{font-size:clamp(42px,9vw,78px);margin:15px 0 4px;font-weight:400}
+  .subtitle{font-size:20px;color:#f6dce4;font-style:italic;margin-bottom:30px}
+  .reel{font-size:38px;margin:8px 0}
+  .message{font-size:20px;line-height:1.65;max-width:560px;margin:0 auto 28px;color:#f9edf1}
+  .details{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:25px auto;max-width:520px}
+  .detail{padding:16px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(255,255,255,.045)}
+  .label{display:block;font:10px Arial,sans-serif;letter-spacing:2px;color:#d998ac;margin-bottom:7px}
+  .value{font-size:18px}
+  .count-title{font:11px Arial,sans-serif;letter-spacing:3px;color:#d998ac;margin-top:30px}
+  .count{display:flex;justify-content:center;gap:10px;margin:13px 0 25px}
+  .box{min-width:72px;padding:13px 8px;border-radius:15px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13)}
+  .num{font:700 28px Arial,sans-serif}.unit{font:9px Arial,sans-serif;letter-spacing:1px;color:#c9a8b3}
+  .closing{font-size:18px;color:#f1cbd6;margin-top:25px}
+  .heart{display:inline-block;animation:pulse 1.4s infinite}
+  @keyframes pulse{50%{transform:scale(1.18)}}
+  @media(max-width:500px){.details{grid-template-columns:1fr}.box{min-width:62px}.num{font-size:23px}.count{gap:6px}}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<main class="card">
+  <div class="ticket">★ INVITACIÓN ESPECIAL ★</div>
+  <div class="reel">🎞️ ❤️ 🎬</div>
+  <h1>Amor mío</h1>
+  <div class="subtitle">Tengo una cita muy especial para ti…</div>
+
+  <p class="message">
+    Quiero compartir contigo una noche de esas que se sienten bonitas,
+    sin prisas y solo para nosotros. 🍿<br><br>
+    Una película, algo rico para comer, muchos abrazos
+    y la mejor compañía: <strong>tú</strong>.
+  </p>
+
+  <section class="details">
+    <div class="detail"><span class="label">FECHA</span><span class="value">9 de octubre, 2026</span></div>
+    <div class="detail"><span class="label">HORA</span><span class="value">6:00 PM</span></div>
+    <div class="detail"><span class="label">LUGAR</span><span class="value">Mi casa 🏠</span></div>
+    <div class="detail"><span class="label">PLAN</span><span class="value">Película(s) elegidas juntos 🎬</span></div>
+  </section>
+
+  <div class="count-title">LA CUENTA REGRESIVA COMIENZA…</div>
+  <div class="count">
+    <div class="box"><div class="num" id="days">--</div><div class="unit">DÍAS</div></div>
+    <div class="box"><div class="num" id="hours">--</div><div class="unit">HORAS</div></div>
+    <div class="box"><div class="num" id="mins">--</div><div class="unit">MIN</div></div>
+    <div class="box"><div class="num" id="secs">--</div><div class="unit">SEG</div></div>
+  </div>
+
+  <div class="closing">
+    Porque cualquier película se vuelve mejor<br>
+    cuando la veo contigo. <span class="heart">❤️</span>
+  </div>
+</main>
+
+<script>
+const target = new Date("2026-10-09T18:00:00-06:00").getTime();
+function update(){
+  let d = target - Date.now();
+  if(d <= 0){
+    document.getElementById("days").textContent="00";
+    document.getElementById("hours").textContent="00";
+    document.getElementById("mins").textContent="00";
+    document.getElementById("secs").textContent="00";
+    document.querySelector(".count-title").textContent="¡LA CITA ES HOY! ❤️";
+    return;
+  }
+  const days=Math.floor(d/86400000); d%=86400000;
+  const hours=Math.floor(d/3600000); d%=3600000;
+  const mins=Math.floor(d/60000); d%=60000;
+  const secs=Math.floor(d/1000);
+  document.getElementById("days").textContent=String(days).padStart(2,"0");
+  document.getElementById("hours").textContent=String(hours).padStart(2,"0");
+  document.getElementById("mins").textContent=String(mins).padStart(2,"0");
+  document.getElementById("secs").textContent=String(secs).padStart(2,"0");
+}
+update(); setInterval(update,1000);
+</script>
+</body>
+</html>
